@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"
+>
+
+	<description>项目引用的所有其他配置文件</description>
+
+<!--	<bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor" />
+
+	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+		  scope="prototype">
+		<property name="patterns">
+			<list>
+				<value>com.cesgroup.auth.service.*</value>
+			</list>
+		</property>
+	</bean>
+	<aop:config>
+		<aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut" />
+	</aop:config>-->
+
+
+	<!-- required -->
+	<import resource="security/applicationContext-shiro.xml" />
+
+	<!-- optional -->
+	<import resource="cache/applicationContext-ehcache.xml" />
+	<import resource="cache/applicationContext-ehcache.xml" />
+	<import resource="task/applicationContext-task.xml" />
+	<import resource="other/applicationContext-other.xml" />
+	<!-- <import resource="cache/applicationContext-memcached.xml" /> -->
+	
+	
+<!--<import resource="solr/applicationContext-solr.xml" />
+	<import resource="mq/applicationContext-mq.xml" />
+	<import resource="email/applicationContext-email.xml" />
+	<import resource="jms/applicationContext-jms-simple.xml" />
+	<import resource="jms/applicationContext-jms-advanced.xml" />
+	<import resource="jmx/applicationContext-jmx.xml" />
+	<import resource="monitor/applicationContext-metrics.xml" />
+	<import resource="monitor/applicationContext-profiler.xml" />
+	<import resource="schedule/applicationContext-jdk-timer.xml" />
+	<import resource="schedule/applicationContext-spring-scheduler.xml" />
+	<import resource="schedule/applicationContext-quartz-cron-local.xml" />
+	<import resource="schedule/applicationContext-quartz-timer-cluster.xml" />
+	<import resource="webservice/applicationContext-soap-server.xml" />
+	<import resource="webservice/applicationContext-jaxrs-server.xml" /> -->
+</beans>

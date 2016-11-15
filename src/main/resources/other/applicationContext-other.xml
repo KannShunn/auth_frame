@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <description>其他配置文件, 常用于定义实现内部接口</description>
+
+    <!-- 自动生成器实现类 -->
+    <bean id="generatorService" class="com.cesgroup.auth.genertor.service.impl.DefaultGeneratorServiceImpl"></bean>
+</beans>

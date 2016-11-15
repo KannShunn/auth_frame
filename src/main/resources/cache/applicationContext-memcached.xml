@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	default-lazy-init="true"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+>
+
+	<import resource="simplesm-context.xml" />
+
+	<bean name="defaultMemcachedClient" class="com.google.code.ssm.CacheFactory">
+		<property name="cacheClientFactory">
+			<bean name="cacheClientFactory" class="com.google.code.ssm.providers.spymemcached.MemcacheClientFactoryImpl" />
+		</property>
+		<property name="addressProvider">
+			<bean class="com.google.code.ssm.config.DefaultAddressProvider">
+				<property name="address" value="${memcached.url}" />
+			</bean>
+		</property>
+		<property name="configuration">
+			<bean class="com.google.code.ssm.providers.CacheConfiguration">
+				<property name="consistentHashing" value="true" />
+			</bean>
+		</property>
+	</bean>
+
+<!-- 	<beans profile="development,functional,test">
+		演示用的JMemcached, 模拟Memcached服务器
+		<bean id="memcachedSimulator" class="com.shecc.ipm.test.cache.memcached.MemcachedSimulator"
+			lazy-init="false"
+		>
+			<property name="serverUrl" value="${memcached.url}" />
+		</bean>
+	</beans> -->
+</beans>
