@@ -15,20 +15,32 @@
 	
 	<description>Spring公共配置</description>
 
-	<!-- 定义aspectj，可以参考 http://jinnianshilongnian.iteye.com/blog/1901694 -->
-	<aop:aspectj-autoproxy proxy-target-class="true" />
-	<!-- 使用annotation定义事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
-
-	<!-- 加载属性配置文件 -->
-	<!-- <context:property-placeholder
-		ignore-resource-not-found="false" location="classpath*:/application.properties" /> -->
-
+	<!-- enable autowire -->
+	<context:annotation-config />
+	
+<!-- 	<context:component-scan base-package="com.cesgroup.**.service.impl" />
+	<context:component-scan base-package="com.cesgroup.auth.user.service.impl" />
+	<context:component-scan base-package="com.cesgroup.**.dao" />
+	<context:component-scan base-package="com.cesgroup.**.entity" />
+	<context:component-scan base-package="com.cesgroup.**.common" />
+	<context:component-scan base-package="com.cesgroup.**.exception" />
+	<context:component-scan base-package="com.cesgroup.**.catpcha" />
+	<context:component-scan base-package="com.cesgroup.**.shiro" />
+	<context:component-scan base-package="com.cesgroup.**.utils" /> -->
 	<!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
 	<context:component-scan base-package="com.cesgroup">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
+		<!-- <context:exclude-filter type="regex" expression=".*Dao" /> -->
+	
+	<!-- 定义aspectj，可以参考 http://jinnianshilongnian.iteye.com/blog/1901694 -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<!-- 加载属性配置文件 -->
+	<!-- <context:property-placeholder
+		ignore-resource-not-found="false" location="classpath*:/application.properties" /> -->
+
 
 	<!-- Jpa Entity Manager 配置 -->
 	<bean id="entityManagerFactory"
@@ -56,13 +68,17 @@
 	</bean>
 
 	<!-- Spring Data Jpa配置, 扫描base-package下所有继承于Repository<T,ID>的接口 -->
-	<jpa:repositories base-package="com.cesgroup.**.dao" transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory" />
+	<jpa:repositories base-package="com.ces.**.jpa,com.cesgroup.**.dao" repository-impl-postfix="Impl" transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory" />
 
 	<!-- 事务管理器配置, Jpa单数据源事务 -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-
+	
+	<!-- 使用annotation定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" mode="aspectj" /> -->
+	
 	<!-- hibernate validator -->
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
@@ -105,8 +121,8 @@
 	        <property name="ignoreUnresolvablePlaceholders" value="true" />
 	        <property name="locations">
 	            <list>
-	                <value>classpath:conf/production/db.properties</value>
-	                <value>classpath:conf/production/application.properties</value>
+	                <value>classpath*:conf/production/db.properties</value>
+	                <value>classpath*:conf/production/application.properties</value>
 	            </list>
 	        </property>
 		</bean>
@@ -168,8 +184,8 @@
 	        <property name="ignoreUnresolvablePlaceholders" value="true" />
 	        <property name="locations">
 	            <list>
-	                <value>classpath:conf/dev/db.properties</value>
-	                <value>classpath:conf/dev/application.properties</value>
+	                <value>classpath*:conf/dev/db.properties</value>
+	                <value>classpath*:conf/dev/application.properties</value>
 	            </list>
 	        </property>
 		</bean>

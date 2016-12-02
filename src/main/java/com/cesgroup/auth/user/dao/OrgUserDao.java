@@ -11,7 +11,7 @@ import com.cesgroup.common.global.Constants;
 import com.cesgroup.core.dao.BaseDao;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
+//@Transactional
 public interface OrgUserDao extends BaseDao<OrgUser>{
 
 	@Modifying

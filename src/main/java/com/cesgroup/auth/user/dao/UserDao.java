@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author niklaus
  *
  */
-@Transactional
+//@Transactional
 public interface UserDao extends BaseDao<User>
 {
 	
@@ -31,8 +31,9 @@ public interface UserDao extends BaseDao<User>
 
 	@Modifying
 	@Query("update User set status = '"+ Constants.User.OFFJOB+"',offJobDate = :offJobDate where id = :userId")
-	public void deleteByUserId(@Param("userId") String userId,@Param("offJobDate") String offJobDate);
+	public int deleteByUserId(@Param("userId") String userId,@Param("offJobDate") String offJobDate);
 
+	
 	@Query("select u from User u where exists (select ru.userId from RoleUser ru where ru.userId = u.id and ru.roleId = ?1)")
 	public List<User> getUsersOfRole(String roleId);
 }

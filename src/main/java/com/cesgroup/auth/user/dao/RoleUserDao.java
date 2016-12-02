@@ -9,7 +9,7 @@ import com.cesgroup.auth.user.entity.RoleUser;
 import com.cesgroup.core.dao.BaseDao;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
+//@Transactional
 public interface RoleUserDao extends BaseDao<RoleUser>{
 
 	@Modifying

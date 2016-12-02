@@ -27,7 +27,7 @@
 
 	<!-- optional -->
 	<import resource="cache/applicationContext-ehcache.xml" />
-	<import resource="cache/applicationContext-ehcache.xml" />
+<!-- 	<import resource="cache/applicationContext-ehcache.xml" /> -->
 	<import resource="task/applicationContext-task.xml" />
 	<import resource="other/applicationContext-other.xml" />
 	<!-- <import resource="cache/applicationContext-memcached.xml" /> -->

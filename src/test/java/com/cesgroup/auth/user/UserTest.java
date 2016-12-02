@@ -31,7 +31,7 @@ public class UserTest extends AbstractContextControllerTest
 	}
 
 	@Test
-	public void getResource6sByUserIdTest(){
+	public void getResourcesByUserIdTest(){
 		String userId = "2";
 		String unitId = "-1";
 		List<Resource> resources = userService.getResourcesByUserId(userId, unitId);
@@ -39,5 +39,12 @@ public class UserTest extends AbstractContextControllerTest
 		for (Resource resource : resources) {
 			System.out.println(resource.getName());
 		}
+	}
+	
+	@Test
+	public void deleteUserTest(){
+		String userId = "8a949fd2587510ba015875120c2b0006";
+		
+		userService.delete(userId);
 	}
 }

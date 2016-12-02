@@ -1,11 +1,25 @@
 package com.cesgroup.auth.user.service.impl;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.cesgroup.auth.org.entity.Org;
 import com.cesgroup.auth.org.service.OrgService;
 import com.cesgroup.auth.org.vo.OrgUserTreeVo;
 import com.cesgroup.auth.resource.dao.ResourceDao;
 import com.cesgroup.auth.resource.entity.Resource;
-import com.cesgroup.auth.role.entity.Role;
 import com.cesgroup.auth.user.dao.OrgUserDao;
 import com.cesgroup.auth.user.dao.RoleUserDao;
 import com.cesgroup.auth.user.dao.UserDao;
@@ -17,24 +31,15 @@ import com.cesgroup.auth.user.service.UserService;
 import com.cesgroup.auth.user.vo.UserGridVo;
 import com.cesgroup.common.global.Constants;
 import com.cesgroup.core.service.impl.BaseServiceImpl;
-import com.cesgroup.core.utils.*;
+import com.cesgroup.core.utils.ArrayUtil;
+import com.cesgroup.core.utils.Collections3;
+import com.cesgroup.core.utils.DateUtil;
+import com.cesgroup.core.utils.JDBCUtil;
+import com.cesgroup.core.utils.SearchFilter;
+import com.cesgroup.core.utils.StrUtil;
+import com.cesgroup.core.utils.Util;
 import com.cesgroup.core.vo.PageVo;
 import com.cesgroup.login.service.LoginFailedLogService;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static org.apache.shiro.web.filter.mgt.DefaultFilter.user;
 
 /**
  * 用户服务
@@ -317,7 +322,7 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserDao> implements Us
 				onDeleteSuccess(userIds);
 			} catch (Exception e) {
 				onDeleteError(e,userIds);
-				throw new RuntimeException(e);
+				throw e;
 			} finally {
 				onDeleteComplete(userIds);
 			}
