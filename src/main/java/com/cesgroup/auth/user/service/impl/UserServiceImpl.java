@@ -305,6 +305,7 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserDao> implements Us
 	}
 
 	@Override
+//	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void delete(String userIds) {
 		if(StringUtils.isNotEmpty(userIds)){
 			try {
