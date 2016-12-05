@@ -2,16 +2,13 @@ package com.cesgroup.auth.user.dao;
 
 import java.util.List;
 
-import com.cesgroup.auth.resource.entity.Resource;
-import com.cesgroup.common.global.Constants;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.cesgroup.auth.user.entity.User;
-import com.cesgroup.auth.user.vo.UserGridVo;
+import com.cesgroup.common.global.Constants;
 import com.cesgroup.core.dao.BaseDao;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 用户相关dao
